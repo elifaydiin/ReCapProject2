@@ -12,20 +12,29 @@ namespace ConsoleUI
             //GetCarsBrandId();
 
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine($"{car.CarName}");
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine($"{car.CarName}/{car.ColorName}");
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
-        private static void GetCarsBrandId()
-        {
-            //IOC
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByBrandId(2))
-            {
-                Console.WriteLine(car.Description);
-            }
+        //private static void GetCarsBrandId()
+        //{
+        //    //IOC
+        //    CarManager carManager = new CarManager(new EfCarDal());
+        //    foreach (var car in carManager.GetCarsByBrandId(2))
+        //    {
+        //        Console.WriteLine(car.Description);
+        //    }
         }
     }
-}
+
