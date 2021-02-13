@@ -23,9 +23,9 @@ namespace Business.Concrete
             _carDal.Add(car);
             if (car.Description.Length < 2)
             {
-                return new ErrorResult(Messages.ProductNameInvalid);
+                return new ErrorResult();
             }
-            return new SuccessResult(Messages.ProductAdded);//tip dönüşümlerini ctor ile yapıcagız.
+            return new SuccessResult(Messages.CarAdded);//tip dönüşümlerini ctor ile yapıcagız.
         }
         public IDataResult<List<Car>> GetAll()
         {
@@ -33,7 +33,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Car>> (_carDal.GetAll(),Messages.ProductsListed);
+            return new SuccessDataResult<List<Car>> (_carDal.GetAll(),Messages.CarsListed);
         }
 
         public IDataResult<List<CarDetailDto>>GetCarDetails()
