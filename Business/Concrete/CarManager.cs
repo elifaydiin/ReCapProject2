@@ -38,7 +38,7 @@ namespace Business.Concrete
           
             return new SuccessResult(Messages.CarAdded);//tip dönüşümlerini ctor ile yapıcagız.
         }
-       
+        [ValidationAspect(typeof(CarValidator))]
         [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
@@ -48,7 +48,7 @@ namespace Business.Concrete
             //}
             return new SuccessDataResult<List<Car>> (_carDal.GetAll(),Messages.CarsListed);
         }
-
+        [CacheAspect(duration:10)]
         public IDataResult<List<CarDetailDto>>GetCarDetails()
         {
             if (DateTime.Now.Hour == 1)
